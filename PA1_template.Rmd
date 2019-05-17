@@ -59,7 +59,7 @@ activity2$steps<-ifelse(is.na(activity2$steps),activity2$extr,activity$steps)
 
 ```{r mean steps 2 ,echo=FALSE}
 dailysteps2<-with(activity2,tapply(steps, date, sum))
-hist(dailysteps2,breaks = 10,xlab = "Daily Steps",main = "Histogram of Daily Steps Taken (adjusted NA values)")
+hist(dailysteps2,breaks = 10,xlab = "Daily Steps Taken",main = "Histogram of Daily Steps Taken (adjusted NA values)")
 stepsmean2<-mean(dailysteps2,na.rm = TRUE)
 stepsmedian2<-median(dailysteps2,na.rm = TRUE)
 paste("Mean steps equals = ", stepsmean2)
