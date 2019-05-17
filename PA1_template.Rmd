@@ -16,6 +16,7 @@ activity<-activity[complete.cases(activity),]
 ```
 
 ## What is mean total number of steps taken per day?
+[]("./PA1_template_files/figure-html/mean steps-1.png")
 ```{r mean steps,echo=FALSE}
 dailysteps<-with(activity,tapply(steps, date, sum))
 hist(dailysteps,breaks = 10,xlab = "Daily Steps",main = "Histogram of Daily Steps Taken")
@@ -27,6 +28,7 @@ paste("Median steps equals = ", stepsmedian)
 
 
 ## What is the average daily activity pattern?
+[]("./PA1_template_files/figure-html/interval steps-1.png")
 ```{r interval steps,echo=FALSE}
 intervalsteps<-with(activity,tapply(steps, interval, mean))
         plot(intervalsteps, ylab = "Average Steps Taken",xlab = "Time",main = "Average Daily Activity Pattern",xaxt="n")
@@ -57,6 +59,7 @@ activity2$extr<-intervalsteps
 activity2$steps<-ifelse(is.na(activity2$steps),activity2$extr,activity$steps) 
 ```
 
+[]("./PA1_template_files/figure-html/mean steps 2 -1.png")
 ```{r mean steps 2 ,echo=FALSE}
 dailysteps2<-with(activity2,tapply(steps, date, sum))
 hist(dailysteps2,breaks = 10,xlab = "Daily Steps Taken",main = "Histogram of Daily Steps Taken (adjusted NA values)")
@@ -67,6 +70,7 @@ paste("Median steps equals = ", stepsmedian2)
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+[]("./PA1_template_files/figure-html/Weekday/mean steps 2 -1.png/Weekend separation-1.png")
 ```{r Weekday/Weekend separation, echo=FALSE}
 activity2$day<-weekdays(as.Date(activity2$date))
 activity2$def<-"Weekday"
