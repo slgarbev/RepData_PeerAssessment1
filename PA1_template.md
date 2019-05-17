@@ -16,7 +16,6 @@ activity<-activity[complete.cases(activity),]
 ```
 
 ## What is mean total number of steps taken per day?
-[]("./PA1_template_files/figure-html/mean steps-1.png")
 ![](PA1_template_files/figure-html/mean steps-1.png)<!-- -->
 
 ```
@@ -29,7 +28,6 @@ activity<-activity[complete.cases(activity),]
 
 
 ## What is the average daily activity pattern?
-[]("./PA1_template_files/figure-html/interval steps-1.png")
 ![](PA1_template_files/figure-html/interval steps-1.png)<!-- -->
 
 ```
@@ -57,7 +55,6 @@ activity2$extr<-intervalsteps
 activity2$steps<-ifelse(is.na(activity2$steps),activity2$extr,activity$steps) 
 ```
 
-[]("./PA1_template_files/figure-html/mean steps 2 -1.png")
 ![](PA1_template_files/figure-html/mean steps 2 -1.png)<!-- -->
 
 ```
@@ -69,6 +66,5 @@ activity2$steps<-ifelse(is.na(activity2$steps),activity2$extr,activity$steps)
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
-[]("./PA1_template_files/figure-html/Weekday/mean steps 2 -1.png/Weekend separation-1.png")
 ![](PA1_template_files/figure-html/Weekday/Weekend separation-1.png)<!-- -->
 
