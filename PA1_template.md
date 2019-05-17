@@ -16,7 +16,8 @@ activity<-activity[complete.cases(activity),]
 ```
 
 ## What is mean total number of steps taken per day?
-[]("PA1_template_files/figure-html/mean steps-1.png")<!-- -->
+[](PA1_template_files/figure-html/mean steps-1.png)
+[](figure-html/mean steps-1.png)
 
 ```
 ## [1] "Mean steps equals =  10766.1886792453"
