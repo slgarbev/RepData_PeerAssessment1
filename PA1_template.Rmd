@@ -7,19 +7,83 @@ output:
 
 
 ## Loading and preprocessing the data
+```{r Data Read}
+library(ggplot2)
+library(reshape2)
+activity<-read.csv("activity.csv")
+activity<-activity[complete.cases(activity),]
 
-
+```
 
 ## What is mean total number of steps taken per day?
-
+```{r mean steps,echo=FALSE}
+dailysteps<-with(activity,tapply(steps, date, sum))
+hist(dailysteps,breaks = 10,xlab = "Daily Steps",main = "Histogram of Daily Steps")
+stepsmean<-mean(dailysteps,na.rm = TRUE)
+stepsmedian<-median(dailysteps,na.rm = TRUE)
+paste("Mean steps equals = ", stepsmean)
+paste("Median steps equals = ", stepsmedian)
+```
 
 
 ## What is the average daily activity pattern?
-
+```{r interval steps,echo=FALSE}
+intervalsteps<-with(activity,tapply(steps, interval, mean))
+        plot(intervalsteps, ylab = "Average Steps",xlab = "Time",main = "Average Daily Activity Pattern",xaxt="n")
+        axis(1,at=c(0,36,72,108,144,180,216,252,288),labels = c(000,300,600,900,1200,1500,1800,2100,2400))
+maxinterval<-max(intervalsteps)
+maxindex<-which(intervalsteps==maxinterval)[[1]]
+maxindex<-names(intervalsteps)[[maxindex]]
+paste("Maximum average activity occurs at ", maxindex," taking a value of ",maxinterval, " average steps!")
+```
 
 
 ## Imputing missing values
+```{r Data re-Read, echo=FALSE}
+activity2<-read.csv("activity.csv")
+paste("There are ",sum(is.na(activity2$steps)), " NAs")
+```
+### Reconstructing the Data
+```{r Imputing}
+activity2<-read.csv("activity.csv")
 
+##Computing the mean for each Interval in the day
+intervalsteps<-with(activity,tapply(steps, interval, mean))
 
+##Adding an extra column to the dataset corresponding to the mean of the specified interval
+activity2$extr<-intervalsteps
+
+##If there is an NA value, the code replaces it with the mean (from the 4th column)
+activity2$steps<-ifelse(is.na(activity2$steps),activity2$extr,activity$steps) 
+```
+
+```{r mean steps 2 ,echo=FALSE}
+dailysteps2<-with(activity2,tapply(steps, date, sum))
+hist(dailysteps2,breaks = 10,xlab = "Daily Steps",main = "Histogram of Daily Steps (adjusted NA values")
+stepsmean2<-mean(dailysteps2,na.rm = TRUE)
+stepsmedian2<-median(dailysteps2,na.rm = TRUE)
+paste("Mean steps equals = ", stepsmean2)
+paste("Median steps equals = ", stepsmedian2)
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+```{r Weekday/Weekend separation, echo=FALSE}
+activity2$day<-weekdays(as.Date(activity2$date))
+activity2$def<-"Weekday"
+weekend<-c("Sunday","Saturday")
+activity2$def<-ifelse(activity2$day %in% weekend,"Weekend","Weekday")
+weekdaymean<-with(activity2[which(activity2$def=="Weekday"),],tapply(steps,interval,mean))
+weekendmean<-with(activity2[which(activity2$def=="Weekend"),],tapply(steps,interval,mean))
+weekdaymean<-as.data.frame(weekdaymean)
+weekdaymean$type<-"Weekday"
+weekdaymean$interval<-rownames(weekdaymean)
+names(weekdaymean)[1]<-"mean"
+weekendmean<-as.data.frame(weekendmean)
+weekendmean$type<-"Weekend"
+weekendmean$interval<-rownames(weekendmean)
+names(weekendmean)[1]<-"mean"
+totalsteps<-rbind(weekendmean,weekdaymean)
+totalsteps$interval<-as.numeric(totalsteps$interval)
+ggplot(totalsteps, aes(x=interval,y=mean))+geom_point()+facet_grid(type~.)+labs(title = "Average Steps by Interval",x="Interval",y="Average Steps")
+```
+
