@@ -16,7 +16,7 @@ activity<-activity[complete.cases(activity),]
 ```
 
 ## What is mean total number of steps taken per day?
-![](PA1_template_files/figure-html/mean steps-1.png)<!-- -->
+![](https://raw.githubusercontent.com/slgarbev/RepData_PeerAssessment1/master/PA1_template_files/figure-html/mean%20steps-1.png)<!-- -->
 
 ```
 ## [1] "Mean steps equals =  10766.1886792453"
@@ -28,7 +28,7 @@ activity<-activity[complete.cases(activity),]
 
 
 ## What is the average daily activity pattern?
-![](PA1_template_files/figure-html/interval steps-1.png)<!-- -->
+![](https://raw.githubusercontent.com/slgarbev/RepData_PeerAssessment1/master/PA1_template_files/figure-html/interval%20steps-1.png)<!-- -->
 
 ```
 ## [1] "Maximum average activity occurs at  835  taking a value of  206.169811320755  average steps!"
@@ -55,7 +55,7 @@ activity2$extr<-intervalsteps
 activity2$steps<-ifelse(is.na(activity2$steps),activity2$extr,activity$steps) 
 ```
 
-![](PA1_template_files/figure-html/mean steps 2 -1.png)<!-- -->
+![](https://raw.githubusercontent.com/slgarbev/RepData_PeerAssessment1/master/PA1_template_files/figure-html/mean%20steps%202%20-1.png)<!-- -->
 
 ```
 ## [1] "Mean steps equals =  11092.1394989174"
@@ -66,5 +66,5 @@ activity2$steps<-ifelse(is.na(activity2$steps),activity2$extr,activity$steps)
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
-![](PA1_template_files/figure-html/Weekday/Weekend separation-1.png)<!-- -->
+![](https://raw.githubusercontent.com/slgarbev/RepData_PeerAssessment1/master/PA1_template_files/figure-html/Weekday/Weekend%20separation-1.png)<!-- -->
 
